@@ -49,3 +49,8 @@ export function formatDigits(value: number, width: number): string {
 export function litSegments(norm: number, count: number): number {
   return Math.round(clamp(norm, 0, 1) * count);
 }
+
+/** Instrument face scale — typical mainnet sits mid-tube, not on the floor. */
+export function meterNorm(norm: number, gain = 1.75): number {
+  return clamp(norm * gain, 0, 1);
+}

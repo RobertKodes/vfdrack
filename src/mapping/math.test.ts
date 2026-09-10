@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import type { ChainSample } from "../types";
-import { clamp, formatDigits, litSegments, logNorm, percentile, sampleToTubes } from "./math";
+import { clamp, formatDigits, litSegments, logNorm, meterNorm, percentile, sampleToTubes } from "./math";
 
 const base: ChainSample = {
   t: 1_000,
@@ -45,6 +45,12 @@ describe("mapping", () => {
     const late = sampleToTubes({ ...base, lagMs: 5000, slotDelta: 0 });
     expect(late.lagNorm).toBeGreaterThan(tight.lagNorm);
     expect(late.stall).toBeGreaterThan(tight.stall);
+  });
+
+  it("gains typical load so the LOAD tube is not a stub", () => {
+    const mid = sampleToTubes({ ...base, tps: 1648 });
+    expect(meterNorm(mid.loadNorm)).toBeGreaterThan(0.45);
+    expect(meterNorm(mid.loadNorm)).toBeLessThan(1);
   });
 
   it("pads and clips 7-seg digit strings", () => {

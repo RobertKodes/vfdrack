@@ -53,16 +53,25 @@ export function StripChart({ history, mutes, powered }: Props) {
       if (mutes[trace.key]) continue;
       ctx.beginPath();
       ctx.strokeStyle = trace.color;
-      ctx.lineWidth = 1.4;
+      ctx.lineWidth = 1.6;
       ctx.shadowColor = trace.color;
-      ctx.shadowBlur = 6;
+      ctx.shadowBlur = 7;
+      let lastX = 0;
+      let lastY = height;
       history.forEach((sample, i) => {
         const x = ((sample.t - start) / span) * width;
-        const y = height - 4 - trace.pick(sample) * (height - 8);
+        const y = height - 6 - trace.pick(sample) * (height - 12);
         if (i === 0) ctx.moveTo(x, y);
         else ctx.lineTo(x, y);
+        lastX = x;
+        lastY = y;
       });
       ctx.stroke();
+      ctx.shadowBlur = 0;
+      ctx.fillStyle = trace.color;
+      ctx.beginPath();
+      ctx.arc(lastX, lastY, 2.4, 0, Math.PI * 2);
+      ctx.fill();
     }
   }, [history, mutes, powered]);
 

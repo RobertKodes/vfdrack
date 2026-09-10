@@ -144,7 +144,7 @@ h1 {
 h2 {
   margin: 0;
   font-size: 28px;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.1em;
   color: #d5cfc0;
 }
 
@@ -269,6 +269,12 @@ h2 {
   box-shadow: inset 0 10px 18px rgba(0, 0, 0, 0.65);
 }
 
+.bench.powered .tube-glass {
+  box-shadow:
+    inset 0 0 36px rgba(111, 255, 224, 0.08),
+    inset 0 10px 18px rgba(0, 0, 0, 0.5);
+}
+
 .tube-glass::after {
   content: "";
   pointer-events: none;
@@ -292,16 +298,17 @@ h2 {
 }
 
 .load-glass {
-  display: grid;
-  grid-template-columns: 1.1fr 0.9fr;
-  gap: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
   min-height: 196px;
 }
 
 .load-digits {
-  display: grid;
-  align-content: start;
-  gap: 6px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 10px;
 }
 
 .slot-row {
@@ -448,14 +455,14 @@ h2 {
 
 .s {
   position: absolute;
-  background: #12201c;
-  opacity: 0.28;
+  background: #16352d;
+  opacity: 0.42;
 }
 
 .s.on {
   background: var(--phosphor);
   opacity: 1;
-  box-shadow: 0 0 6px var(--phosphor), 0 0 16px rgba(111, 255, 224, 0.45);
+  box-shadow: 0 0 8px var(--phosphor), 0 0 22px rgba(111, 255, 224, 0.55);
 }
 
 .s.a, .s.d, .s.g { height: 12%; left: 14%; right: 14%; }
@@ -496,26 +503,26 @@ h2 {
 
 .bargraph.vert {
   flex-direction: column;
-  width: 8px;
+  width: 14px;
   height: 100%;
 }
 
 .cell {
   flex: 1;
-  background: #10201b;
-  opacity: 0.28;
-  min-height: 3px;
+  background: #16352d;
+  opacity: 0.42;
+  min-height: 6px;
 }
 
 .bargraph.horiz .cell {
-  min-width: 4px;
-  height: 10px;
+  min-width: 5px;
+  height: 12px;
 }
 
 .cell.on {
   background: var(--phosphor);
   opacity: 1;
-  box-shadow: 0 0 6px rgba(111, 255, 224, 0.55);
+  box-shadow: 0 0 8px rgba(111, 255, 224, 0.6);
 }
 
 .cell.warn.on {
@@ -525,8 +532,8 @@ h2 {
 
 .amp-bars {
   display: flex;
-  gap: 3px;
-  height: 176px;
+  gap: 5px;
+  height: 132px;
   padding: 4px 2px;
 }
 
@@ -554,13 +561,13 @@ h2 {
 
 .needle {
   stroke: #2a3330;
-  stroke-width: 2;
+  stroke-width: 3;
   stroke-linecap: round;
 }
 
 .needle-meter.lit .needle {
   stroke: var(--phosphor);
-  filter: drop-shadow(0 0 4px var(--phosphor));
+  filter: drop-shadow(0 0 6px var(--phosphor));
 }
 
 .hub {
@@ -594,20 +601,12 @@ h2 {
     text-align: left;
   }
 
-  .load-glass {
-    grid-template-columns: 1fr 140px;
-  }
-
   .amp-bars {
-    height: 140px;
+    height: 110px;
   }
 }
 
 @media (max-width: 520px) {
-  .load-glass {
-    grid-template-columns: 1fr;
-  }
-
   .seg-row.lg .digit { width: 26px; height: 46px; }
   .seg-row.md .digit { width: 16px; height: 28px; }
 }

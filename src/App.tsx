@@ -6,7 +6,7 @@ import { SevenSeg } from "./components/SevenSeg";
 import { StripChart } from "./components/StripChart";
 import { usePrefersReducedMotion } from "./hooks/usePrefersReducedMotion";
 import { useVfdrack } from "./hooks/useVfdrack";
-import { formatDigits } from "./mapping/math";
+import { formatDigits, meterNorm } from "./mapping/math";
 import type { ChannelId } from "./types";
 import "./App.css";
 
@@ -83,8 +83,8 @@ export default function App() {
               size="lg"
             />
             <div className="fee-aux">
-              <Needle value={rack.params?.feeNorm ?? 0} lit={live && !rack.mutes.fee} />
-              <Bargraph value={rack.params?.feeNorm ?? 0} lit={live && !rack.mutes.fee} count={18} />
+              <Needle value={meterNorm(rack.params?.feeNorm ?? 0, 1.15)} lit={live && !rack.mutes.fee} />
+              <Bargraph value={meterNorm(rack.params?.feeNorm ?? 0, 1.15)} lit={live && !rack.mutes.fee} count={18} />
             </div>
           </div>
           <p className="read-line">
@@ -101,7 +101,12 @@ export default function App() {
           onMute={() => rack.toggleMute("load")}
         >
           <div className="tube-glass load-glass">
-            <AmplitudeBars value={rack.params?.loadNorm ?? 0} lit={live && !rack.mutes.load} />
+            <AmplitudeBars
+              value={meterNorm(rack.params?.loadNorm ?? 0)}
+              lit={live && !rack.mutes.load}
+              columns={8}
+              rows={10}
+            />
             <div className="load-digits">
               <SevenSeg
                 value={formatDigits(rack.sample?.tps ?? 0, 5)}
@@ -141,7 +146,7 @@ export default function App() {
               <div className="lag-stack">
                 <span className="unit-chip">LAG ms</span>
                 <Bargraph
-                  value={rack.params?.lagNorm ?? 0}
+                  value={meterNorm(rack.params?.lagNorm ?? 0, 1.4)}
                   lit={live && !rack.mutes.slot}
                   count={14}
                 />
