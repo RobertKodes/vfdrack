@@ -1,0 +1,63 @@
+:root {
+  color-scheme: dark;
+  --chassis: #141614;
+  --bezel: #2c302e;
+  --chrome: #8a908c;
+  --phosphor: #6fffe0;
+  --warn: #e8b44a;
+  --silk: #b7b09a;
+  --cavity: #050807;
+  --ink: #d8d4c4;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  background:
+    radial-gradient(900px 420px at 12% -8%, rgba(111, 255, 224, 0.05), transparent 46%),
+    linear-gradient(180deg, #1b1d1c, var(--chassis) 38%);
+  color: var(--ink);
+  font-family: "Share Tech Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 13px;
+}
+
+button {
+  font: inherit;
+}
+
+h1,
+h2,
+.kicker,
+.mod-tag,
+.rocker-label,
+.blank,
+.well-head,
+.legend,
+.lamp span,
+.unit-chip {
+  font-family: "Antonio", "Share Tech Mono", sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+}
+
+code {
+  color: var(--phosphor);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
